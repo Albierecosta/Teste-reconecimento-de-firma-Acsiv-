@@ -11,12 +11,12 @@ else:
 
 #dta = str(input('Digite a data da emissao: '))
 ins = 'isento'
-insento = str(input('Qual valor do emolumento? (se for isento digite ins) '))
+isento = str(input('Qual valor do emolumento? (se for isento digite ins) '))
 
-if insento == 'ins':
-    insento2 = ins
+if isento == 'ins':
+    isento2 = ins
 else:
-    insento2 = insento
+    isento2 = isento
 
 s = 'Semelhança'
 a = 'Autenticidade'
@@ -44,5 +44,5 @@ for x in range(quantidade):
     print('|{}                                    '.format(pessoas))
     print('|                                        ')
     print('|Pará de Minas, {}                      '.format(dataat2))
-    print('|Valor dos Emolumentos: {}               '.format(insento2))
+    print('|Valor dos Emolumentos: {}               '.format(isento2))
     print('_________________________________________________')

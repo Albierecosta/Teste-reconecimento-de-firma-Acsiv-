@@ -1,3 +1,16 @@
+import psycopg2
+import psycopg2.extras
+
+host = 'localhost'
+dbname = 'etiquetas'
+user = 'postgres'
+passoword = 'p.0300581-db'
+sslmode = 'require'
+
+# conn_string = 'host={0} user={1} dbname={2} password={3} sslmode={4}'.format(host, user, dbname, passoword, sslmode)
+
+
+
 from time import sleep
 from datetime import date
 today = date.today()
@@ -5,7 +18,7 @@ today = date.today()
 cidade = str(input('informe sua cidade: \n'))
 
 arrayEmol = 'Emolumentos: '
-
+id = "1"
 print("\n---------------------------------------------")
 print("Digite (1) para buscar a data atual.")
 print("Digite (2) para digitar uma data valida.")
@@ -19,7 +32,7 @@ elif data > 2:
     data = int(input("informe uma opção valida: "))
 elif data == 1:
     print("Buscando data atual...")
-    sleep(3)  
+    sleep(1)  
 
 def opcao1():
     global dataAtual
@@ -77,7 +90,7 @@ arraynome = []
 arraycpf = []
 
 i = 0
-quantidade = int(input("Informe a quantidade de partes: "))
+quantidade = int(input("Quantidade de Partes: "))
 
 for i in range(quantidade):
     nome = input("Digite seu nome: ")
@@ -126,3 +139,18 @@ with open("salva.csv", 'a+', newline='') as salva:
         for x in range(len(arraynome)):
             escrever.writerow([arraynome[x], arraycpf[x], valor, cidade, dataAtual, quantidade])
 
+
+conn = psycopg2.connect(dbname=dbname, user=user, password=passoword, host=host)
+# cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+cur = conn.cursor()
+
+# cur.execute("CREATE TABLE dados(id SERIAL PRIMARY KEY, partes VARCHAR, cpf VARCHAR, cidade VARCHAR, emolumentos VARCHAR, data VARCHAR, quantidade VARCHAR);")
+
+for x in range(len(arraynome)):
+    cur.execute("INSERT INTO dados(partes, cpf, data, quantidade, cidade, emolumentos, tipo) VALUES(%s, %s, %s, %s, %s, %s, %s)", (arraynome[x], arraycpf[x], dataAtual, quantidadeEtiqueta, cidade, valor, tipo))
+
+conn.commit()
+
+# conn.close()
+
+print("conectado")

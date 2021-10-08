@@ -4,7 +4,7 @@ import psycopg2.extras
 host = 'localhost'
 dbname = 'etiquetas'
 user = 'postgres'
-passoword = 'p.0300581-db'
+passoword = '************'
 sslmode = 'require'
 
 # conn_string = 'host={0} user={1} dbname={2} password={3} sslmode={4}'.format(host, user, dbname, passoword, sslmode)
